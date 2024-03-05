@@ -14,13 +14,16 @@ typedef struct{
 typedef TipoItem TipoVetor[MAXTAM + 1];
 
 void SelectionSort(TipoItem *A, TipoIndice N){
-    TipoIndice i, j, Min;
-    TipoItem x;
+    TipoIndice i, j, Min; //Todos esses guardarão as posições dos elementos
+    TipoItem x; //Esse guardará o valor de um elemento
     for (i = 0; i < N; i++){
         Min = i;
+        //Primeiro laço serve para percorrer o vetor.  Min é definido como o elemento i para ser comparado com o restante após ele
         for(j = i + 1; j < N; j++){
+            //Segundo laço serve para comparações entre o Min com cada elemento seguinte, de forma a se obter o menor elemento
             if(A[j].Chave < A[Min].Chave){
                 Min = j;
+                //A partir daqui, X serve como uma variável auxiliar para inverter A[Min] e A[i]
                 x = A[Min];
                 A[Min] = A[i];
                 A[i] = x;
