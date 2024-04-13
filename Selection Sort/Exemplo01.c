@@ -16,7 +16,7 @@ typedef TipoItem TipoVetor[MAXTAM + 1];
 void SelectionSort(TipoItem *A, TipoIndice N){
     TipoIndice i, j, Min; //Todos esses guardarão as posições dos elementos
     TipoItem x; //Esse guardará o valor de um elemento
-    for (i = 0; i < N; i++){
+    for (i = 0; i < N; i++){//!!Questão de Otimização: "for" pode ser de (i < N - 1) devido ao fato de o último número a ser comparado já ser o último número de fato
         Min = i;
         //Primeiro laço serve para percorrer o vetor.  Min é definido como o elemento i para ser comparado com o restante após ele
         for(j = i + 1; j < N; j++){
