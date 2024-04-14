@@ -13,7 +13,7 @@ public class CountingSort {
         for(int i = 0; i < N; i++){
             ++Count[Array[i]];
         }
-        for(int i = 1; i <= 9999999; ++i){
+        for(int i = 1; i <= 10000000; ++i){
             Count[i] += Count[i-1];
         }
         for(int i = N-1; i >= 0; i--){
@@ -33,7 +33,7 @@ public class CountingSort {
 
     public static void main(String args[]){
         CountingSort cs = new CountingSort();
-        String CaminhoArquivo = "C:\\Users\\jpsza\\OneDrive\\Documentos\\GitHub\\AED2-Unifesp\\TrabalhoEmGrupo1\\TabelaA1.csv";
+        String CaminhoArquivo = "C:\\Users\\jpsza\\OneDrive\\Documentos\\GitHub\\AED2-Unifesp\\TrabalhoEmGrupo1\\TabelaB5.csv";
 
         List<Integer> Lista = new ArrayList<>();
 
@@ -51,6 +51,6 @@ public class CountingSort {
         int Array[] = Lista.stream().mapToInt(i -> i).toArray();
         cs.Sort(Array);
 
-        //ImprimirArray(Array);
+        ImprimirArray(Array);
     }
 }

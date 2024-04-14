@@ -42,6 +42,6 @@ public class InsertionSort{
         InsertionSort is = new InsertionSort();
         is.Sort(Array);
         
-        //ImprimirArray(Array); //Comente isso caso não queira Imprimir
+        ImprimirArray(Array); //Comente isso caso não queira Imprimir
     }
 }
