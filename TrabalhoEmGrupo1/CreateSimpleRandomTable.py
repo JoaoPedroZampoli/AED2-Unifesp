@@ -6,7 +6,7 @@ DiretorioAtual = os.path.dirname(os.path.realpath(__file__))
 
 for i in range(1,6):
     Num = str(i)
-    Counter = random.randint(1001,1000001)
+    Counter = random.randint(1000,1000000)
     NomeArquivo = "TabelaA"+Num+".csv"
     CaminhoArquivo = os.path.join(DiretorioAtual, NomeArquivo)
     with open(CaminhoArquivo, 'w', newline='') as file:
