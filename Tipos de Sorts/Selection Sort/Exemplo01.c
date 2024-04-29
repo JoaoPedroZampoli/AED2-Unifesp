@@ -16,7 +16,7 @@ typedef TipoItem TipoVetor[MAXTAM + 1];
 void SelectionSort(TipoItem *A, TipoIndice N){
     TipoIndice i, j, Min; //Todos esses guardarão as posições dos elementos
     TipoItem x; //Esse guardará o valor de um elemento
-    for (i = 0; i < N; i++){//!!Questão de Otimização: "for" pode ser de (i < N - 1) devido ao fato de o último número a ser comparado já ser o último número de fato
+    for (i = 0; i < N - 1; i++){//!!Questão de Otimização: "for" pode ser de (i < N - 1) devido ao fato de o último número a ser comparado já ser o último número de fato
         Min = i;
         //Primeiro laço serve para percorrer o vetor.  Min é definido como o elemento i para ser comparado com o restante após ele
         for(j = i + 1; j < N; j++){
@@ -24,15 +24,28 @@ void SelectionSort(TipoItem *A, TipoIndice N){
             if(A[j].Chave < A[Min].Chave){
                 Min = j;
                 //A partir daqui, X serve como uma variável auxiliar para inverter A[Min] e A[i]
-                x = A[Min];
-                A[Min] = A[i];
-                A[i] = x;
             }
         }
+        x = A[Min];
+        A[Min] = A[i];
+        A[i] = x;
+    }
+}
+
+void ImprimirVetor(TipoVetor Vetor, TipoIndice Tamanho){
+    for(int i = 1; i <= Tamanho; i++){
+        printf("%d ", Vetor[i].Chave);
     }
 }
 
 int main(){
     setlocale(LC_ALL, "Portuguese_Brazil");
     /*Aqui é realizado o preenchimento do Vetor, após isso a função é chamada*/
+    TipoVetor Vetor;
+    for(int i = 1; i <= 10; i++){
+        Vetor[i].Chave = rand() % 100;
+    }
+    SelectionSort(Vetor, 10);
+    printf("Vetor ordenado: \n");
+    ImprimirVetor(Vetor, 10);
 }

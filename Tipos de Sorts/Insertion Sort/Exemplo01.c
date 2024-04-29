@@ -28,7 +28,20 @@ void InsertionSort(TipoItem *Vet, TipoIndice N){
     }
 }
 
+void ImprimirVetor(TipoVetor Vetor, TipoIndice Tamanho){
+    for(int i = 1; i <= Tamanho; i++){
+        printf("%d ", Vetor[i].Chave);
+    }
+}
+
 int main(){
     setlocale(LC_ALL, "Portuguese_Brazil");
     /*Aqui é realizado o preenchimento do Vetor, após isso a função é chamada*/
+    TipoVetor Vetor;
+    for(int i = 1; i <= 10; i++){
+        Vetor[i].Chave = rand() % 100;
+    }
+    InsertionSort(Vetor, 10);
+    printf("Vetor ordenado: \n");
+    ImprimirVetor(Vetor, 10);
 }
