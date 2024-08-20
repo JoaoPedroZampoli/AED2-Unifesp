@@ -3,7 +3,9 @@
         "stdio.h": "c",
         "locale.h": "c",
         "ctype.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "stdbool.h": "c"
     },
-    "java.test.config": {}
+    "java.test.config": {},
+    "C_Cpp.errorSquiggles": "disabled"
 }
