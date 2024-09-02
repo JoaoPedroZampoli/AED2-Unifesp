@@ -8,8 +8,47 @@ typedef struct{
 }Posicao;
 
 int BFS(char **Mapa, int PosX, int PosY, int L){
+    int MovimentoEixoX[] = {-1, 1, 0, 0};
+    int MovimentoEixoY[] = {0, 0, -1, 1};
     int i, j, Distancia[L][80], Visitado[L][80];
-    Posicao Fila[2400];
+    Posicao Fila[L * 80];
+    int Inicio = 0, Fim = 0, NovoX, NovoY;
+
+    for(i = 0; i < L; i++){
+        for(j = 0; j < strlen(Mapa[i]); j++){
+            Distancia[i][j] = -1;
+            Visitado[i][j] = 0;
+        }
+    }
+
+    Distancia[PosX][PosY] = 0;
+    Visitado[PosX][PosY] = 1;
+    Fila[Fim].X = PosX;
+    Fila[Fim].Y = PosY;
+    Fim++;
+
+    while(Inicio < Fim){
+        Posicao P = Fila[Inicio];
+        Inicio++;
+        for(i = 0; i < 4; i++){
+            NovoX = P.X + MovimentoEixoX[i];
+            NovoY = P.Y + MovimentoEixoY[i];
+
+            if(NovoX >= 0 && NovoX < L && NovoY >= 0 && NovoY < 80 && Visitado[NovoX][NovoY] == 0 && (Mapa[NovoX][NovoY] == ' ' || Mapa[NovoX][NovoY] == '$' || Mapa[NovoX][NovoY] == '+' || Mapa[NovoX][NovoY] == '*')){
+                Visitado[NovoX][NovoY] = 1;
+                Distancia[NovoX][NovoY] = Distancia[P.X][P.Y] + 1;
+                Fila[Fim].X = NovoX;
+                Fila[Fim].Y = NovoY;
+                Fim++;
+
+                if(Mapa[NovoX][NovoY] == '$'){
+                    return Distancia[NovoX][NovoY];
+                }
+            }
+        }
+    }
+
+    return -1;
 }
 
 void CompararDistancia(char **Mapa, int JoaoX, int JoaoY, int PedrinhoX, int PedrinhoY, int L){
@@ -18,10 +57,10 @@ void CompararDistancia(char **Mapa, int JoaoX, int JoaoY, int PedrinhoX, int Ped
     DistanciaJoao = BFS(Mapa, JoaoX, JoaoY, L);
     DistanciaPedrinho = BFS(Mapa, PedrinhoX, PedrinhoY, L);
 
-    if(DistanciaJoao < DistanciaPedrinho){
+    if(DistanciaJoao != -1 && (DistanciaPedrinho == -1 || DistanciaJoao < DistanciaPedrinho)){
         printf("1\n");
     }
-    else if(DistanciaJoao > DistanciaPedrinho){
+    else if(DistanciaPedrinho != -1 && (DistanciaJoao == -1 || DistanciaJoao > DistanciaPedrinho)){
         printf("2\n");
     }
     else if(DistanciaJoao == DistanciaPedrinho && DistanciaJoao != -1){
@@ -47,7 +86,7 @@ int main(){
     if(L > 30){
         return 0;
     }
-    char **Mapa = (char**)malloc(L * sizeof(char));
+    char **Mapa = (char**)malloc(L * sizeof(char*));
     getchar();
     for(i = 0; i < L; i++){
         Mapa[i] = (char*)malloc(80 * sizeof(char));
